@@ -57,23 +57,57 @@ THEN this is displayed at the bottom of their employee card
 
 ## Installation
 
-Steps required to install application:
+Steps required to create  README generator:
 
-1. Create new repository * .gitignore * npm init * install inquirer
+1. Create a new repository. 
+    * Open GitHub and create new repository.
+    * do NOT add a README.md file upon creation (that would defeat the purpose!).
+2. Create a new directory to house new repo on your local computer. 
+    * Open Terminal (if MacOS), create a new directory using `mkdir project-name`
+    * Make sure you are in the *root file* of your local repository before you create any files. 
+3. Clone your GitHub repository to your local computer (make sure you are in the root folder of your new directory)
+    ```
+    git clone ssh-key-from-repository
+    ```
+4. Create a .gitignore file:
+    * type `node_modules` in first line
+    * type `.DS_Store` in second line
 
-2. Install jest for testing
+5. Create a new **package.json** file:
+    *  Initialize `npm`: `npm init`. This will be used to set up a new or existing npm package. You can customize the fields, or you can continue to press the enter key until you see `0 vulnerabilities`.
+    * This will create a `package.json` file and a `package-lock.json` file. 
+    * Install the Inquirer package using: `npm install inquirer`
+    * This will create a `node_modules` file. 
+    * You are now ready to create your `index.js` file: `touch index.js`
 
-3. Create new repository * .gitignore * npm init * install inquirer
+6. Set up Inquirer package within your newly created `index.js` file.
+```
+const inquirer = require('inquirer');
+const fs = require("fs");
+const util = require("util");
+const { captureRejectionSymbol } = require("events");
+const { fileURLToPath } = require('url');
+
+const writeFileAsync = util.promisify(fs.writeFile);
+```
+7. Copy and paste the code (or fork it) from the `index.js` within this repository.
+
+8. Save file. Run `index.js` file within terminal using `node index.js`
+
+9. If working, answer the prompts by entering your own inputs via the command line. 
+
+10. A file called **Roster.html** will be created upon completeion. 
+
 
   
 
-## Usage
+## Usage/Developer
 
 Operating instructions and examples for use.
 
 1. take user inputs to create a team roster
 
-![code-snipped alt](https://via.placeholder.com/150)
+![working demo alt](https://via.placeholder.com/150)
 
 2. use node cli to create roster
 
