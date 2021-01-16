@@ -4,7 +4,7 @@
   "description": "hw10: Template Engine, Node CLI that generates an HTML webpage + unit testing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
