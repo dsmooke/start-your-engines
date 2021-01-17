@@ -42,9 +42,9 @@ const outline = [
         name: "role",
         message: "Select your job title:",
         choices: [
-            "Manager",
-            "Engineer",
-            "Intern"
+            "Manager"
+            // Engineer,
+            // Intern
         ]
     },
 
@@ -57,7 +57,34 @@ const promptUser = () => {
 const renderTeam = (answers) => {
     // if (this.role === answers.role[0]) {
     return `
-    <div class="card employee-card">
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>My Team</title>
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/c502137733.js"></script>
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 jumbotron mb-3 team-heading">
+                    <h1 class="text-center">My Team</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="team-area col-12 d-flex justify-content-center">
+                    {{ team }}<div class="card employee-card">
     <div class="card-header">
         <h2 class="card-title">${answers.name}</h2>
         <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${answers.role}
@@ -70,7 +97,15 @@ const renderTeam = (answers) => {
             <li class="list-group-item">Office number:{answers.officeNumber}</li>
         </ul>
     </div>
-</div>`
+</div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
+
+    `
     // } else {
     //     console.log("You are not a Manager")
     // }
