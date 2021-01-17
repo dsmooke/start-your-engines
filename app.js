@@ -12,8 +12,8 @@ const writeFileAsync = util.promisify(fs.writeFile);
 // const Engineer = require("./lib/Engineer");
 // const Intern = require("./lib/Intern");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+// const OUTPUT_DIR = path.resolve(__dirname, "output");
+// const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 // const render = require("./lib/htmlRenderer");
 
@@ -80,7 +80,7 @@ const init = async () => {
     try {
         const addedText = await promptUser();
         const team = renderTeam(addedText);
-        await writeFileAsync(outputPath);
+        await writeFileAsync("team.html", team);
 
         console.log("Successfully created team roster");
     } catch (error) {
