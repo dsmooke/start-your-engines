@@ -22,8 +22,7 @@ This assignment utilizes Node.js and Inquirer.js package to build a Node CLI tha
 ## Goals
 
 1. To build a Node CLI that takes in information about employees and generates and HTML webpage that displays summaries for each person. 
-2. 
-3. To ensure that all unit tests pass. 
+2. To ensure that all unit tests pass. 
 
 ## Instructions
 
