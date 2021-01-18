@@ -71,6 +71,15 @@ const outline = [
 //     }]
 // }
 
+// if (answers.name === "Engineer") {
+//         filter() {
+//             return new inquirer.prompt{ 
+// type: "input",
+// name: "officeNumber",
+// message: "What is your office number?"
+//             }
+//         }
+//     }
 
 const promptUser = () => {
     return inquirer.prompt(outline);
@@ -89,9 +98,9 @@ School: ${answers.school}
 
 const init = () => {
     try {
-        const addedText = await promptUser();
+        const addedText = promptUser();
         const team = renderTeam(addedText);
-        await writeFile("team.html", team);
+        writeFile("team.html", team);
 
         console.log("Successfully created team roster");
     } catch (error) {
