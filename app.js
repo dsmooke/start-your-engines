@@ -5,6 +5,7 @@ const fs = require("fs");
 const util = require("util");
 const { captureRejectionSymbol } = require("events");
 const { fileURLToPath } = require('url');
+const Employee = require("./lib/Employee");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
@@ -23,13 +24,13 @@ const outline = [
     { // add name
         type: "input",
         name: "name",
-        message: "Enter full name:"
+        message: "What is your name?"
     },
 
     { // add id
         type: "input",
         name: "id",
-        message: "Enter ID:",
+        message: "What is your ID?",
     },
 
     { // add email
@@ -43,13 +44,29 @@ const outline = [
         name: "role",
         message: "Select your job title:",
         choices: [
-            "Manager"
-            // Engineer,
-            // Intern
+            "Manager",
+            "Engineer",
+            "Intern"
         ]
     },
 
+    { //add office number if manager 
+        type: "input",
+        name: "officeNumber",
+        message: "What is your office number?"
+    },
+
+
 ]
+
+// if (employee.getRole() === "Manager") {
+//     outline.push[{
+//         type: "input",
+//         name: "officeNumber",
+//         message: "What is your office number?"
+//     }]
+// }
+
 
 const promptUser = () => {
     return inquirer.prompt(outline);
@@ -108,9 +125,7 @@ const renderTeam = (answers) => {
 </html>
 
     `
-    // } else {
-    //     console.log("You are not a Manager")
-    // }
+
 };
 // const init = async () => {
 
