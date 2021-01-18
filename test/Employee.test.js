@@ -1,3 +1,4 @@
+const { test } = require("@jest/globals");
 const Employee = require("../lib/Employee");
 
 test("Can instantiate Employee instance", () => {
@@ -45,4 +46,9 @@ test("getRole() should return \"Employee\"", () => {
     const testValue = "Employee";
     const e = new Employee("Alice", 1, "test@test.com");
     expect(e.getRole()).toBe(testValue);
+});
+
+// test to print Employee { name, id, email } data to console
+test("printInfo() should return \"name, id, email\"", () => {
+    console.log(new Employee)
 });
