@@ -36,10 +36,11 @@ const outline = [
         type: "list",
         name: "role",
         message: "Select your job title:",
+        default: "Employee",
         choices: [
-            "Manager",
-            "Engineer",
-            "Intern"
+            "Manager", //if Manager -> office number
+            "Engineer", // if Engineer -> github username
+            "Intern" // if Intern -> school name
         ]
     },
 
@@ -49,7 +50,17 @@ const outline = [
         message: "What is your office number?"
     },
 
+    { //add github username if engineer 
+        type: "input",
+        name: "gitHub",
+        message: "What is your GitHub username?"
+    },
 
+    { //add school name if intern
+        type: "input",
+        name: "school",
+        message: "What school did you attend?"
+    }
 ]
 
 // if (employee.getRole() === "Manager") {
@@ -69,15 +80,12 @@ const promptUser = () => {
 const renderTeam = (answers) => {
     return `
 Name: ${answers.name}
-Role: ${getRole()}
 ID: ${answers.id}
 Email: ${answers.email}
 GitHub Profile: ${answers.gitHub}
 School: ${answers.school}
     `
 };
-
-// const init = async () => {
 
 const init = () => {
     try {
