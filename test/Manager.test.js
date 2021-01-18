@@ -19,7 +19,7 @@ test("Can get office number via getOffice()", () => {
     expect(e.getOfficeNumber()).toBe(testValue);
 });
 
-// test to print Employee { name, id, email } data to console
+// test to print Manager { name, id, email, office number} data to console
 test("printInfo() should return \"name, id, email, office number\"", () => {
     console.log(new Manager)
 });
