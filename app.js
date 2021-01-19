@@ -10,6 +10,9 @@ const Intern = require("./lib/Intern");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+// const writeFileAsync = util.promisify(fs.writeFile);
+// const util = require("util");
+
 const render = require("./lib/htmlRenderer");
 
 const outline = [
@@ -60,6 +63,12 @@ const outline = [
         type: "input",
         name: "school",
         message: "What school did you attend?"
+    },
+
+    { //add another Employee?
+        type: "confirm",
+        name: "addEmployee",
+        message: "Add Employee? (Y/N) Select no to complete."
     }
 ]
 
@@ -81,10 +90,18 @@ const outline = [
 //         }
 //     }
 
+// generates prompts in terminal for user to answer
 const promptUser = () => {
     return inquirer.prompt(outline);
 };
 
+// render => () {
+//     Manager, Engineer, Intern
+// }
+
+
+
+// render() // returns a block of HTML including templated divs for each employee
 
 const renderTeam = (answers) => {
     return `
@@ -96,11 +113,11 @@ School: ${answers.school}
     `
 };
 
-const init = () => {
+const init = async () => {
     try {
-        const addedText = promptUser();
+        const addedText = await promptUser();
         const team = renderTeam(addedText);
-        writeFile("team.html", team);
+        await writeFileAsync("team.html", team);
 
         console.log("Successfully created team roster");
     } catch (error) {
