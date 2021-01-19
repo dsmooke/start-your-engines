@@ -54,6 +54,24 @@ const questions = ([
         type: "confirm",
         name: "addEmployee",
         message: "Add Employee? Select no to submit."
+    },
+
+    { // add office number
+        type: "input",
+        name: "officeNumber",
+        message: "What is your office number?"
+    },
+
+    { // add github name
+        type: "input",
+        name: "gitHub",
+        message: "What is your GitHub username?"
+    },
+
+    { // add school name
+        type: "input",
+        name: "school",
+        message: "What school did you attend?"
     }])
 
 // generates prompts in terminal for user to answer
@@ -71,40 +89,11 @@ Email: ${answers.email}
 GitHub Profile: ${answers.gitHub}
 School: ${answers.school}
     `
+}
 
-
-    //ask office number if manager 
-    if (answers.role === "Manager") {
-        promptUser({
-            type: "input",
-            name: "officeNumber",
-            message: "What is your office number?"
-        })
-    }
-    // ask github username if engineer
-    else if (answers.role === "Engineer") {
-        promptUser({
-            type: "input",
-            name: "gitHub",
-            message: "What is your GitHub username?"
-        })
-    }
-    // ask school name if intern
-    else (answers.role === "Intern")
-    promptUser({
-        type: "input",
-        name: "school",
-        message: "What school did you attend?"
-    });
-
-    // for (i=0, i>1, i++) {
-    //     promptUser()
-    // }
-
-    // ADD OR SUBMIT QUESTION
-    if (answers.addEmployee === "true") {
-        promptUser()
-    }
+// ADD OR SUBMIT QUESTION
+if (answers.addEmployee === "true") {
+    promptUser()
 };
 
 //     .catch (error => {
