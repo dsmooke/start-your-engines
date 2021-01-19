@@ -15,7 +15,9 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const outline = [
+const questions = [
+    // inquirer.prompt([
+    // const outline = 
 
     { // add name
         type: "input",
@@ -45,32 +47,80 @@ const outline = [
             "Engineer", // if Engineer -> github username
             "Intern" // if Intern -> school name
         ]
-    },
+    }
 
-    { //add office number if manager 
+
+]
+
+if (answers.role === "Manager") {
+    var prompt = inquirer.createPromptModule();
+    prompt(questions).then({
         type: "input",
         name: "officeNumber",
-        message: "What is your office number?"
-    },
-
-    { //add github username if engineer 
-        type: "input",
-        name: "gitHub",
-        message: "What is your GitHub username?"
-    },
-
-    { //add school name if intern
-        type: "input",
-        name: "school",
-        message: "What school did you attend?"
-    },
-
-    { //add another Employee?
-        type: "confirm",
-        name: "addEmployee",
-        message: "Add Employee? (Y/N) Select no to complete."
+        message: "what is your office number?"
     }
-]
+    // return inquirer.Question.officeNumber
+} else if
+    (answers.role === "Engineer") {
+    return inquirer.Question.gitHub
+} else {
+    return inquirer.Question.school
+}
+
+while (answers.addEmployee === true) {
+    return inquirer.prompt(), i++;
+}
+
+{ //add office number if manager 
+    type: "input",
+        name: "officeNumber",
+            message: "What is your office number?"
+},
+
+{ //add github username if engineer 
+    type: "input",
+        name: "gitHub",
+            message: "What is your GitHub username?"
+},
+
+{ //add school name if intern
+    type: "input",
+        name: "school",
+            message: "What school did you attend?"
+},
+
+{ //add another Employee?
+    type: "confirm",
+        name: "addEmployee",
+            message: "Add Employee? Select no to submit."
+}
+
+    // 
+]).then(answers => {//use user feedback for...whatever
+    // while yes to adding new employee, go through prompts again
+    while (answers.addEmployee === true) {
+        return inquirer.prompt(), i++;
+    }
+    if (answers.role === "Manager") {
+        return inquirer.Question.officeNumber
+    } else if
+        (answers.role === "Engineer") {
+        return inquirer.Question.gitHub
+    } else {
+        return inquirer.Question.school
+    }
+
+
+
+})
+    .catch(error => {
+        if (error.isTtyError) {
+            return "prompt couldn't be rendered in the current environment"
+        } else {
+            return "something else went wrong"
+        }
+    });
+
 
 // if (employee.getRole() === "Manager") {
 //     outline.push[{
@@ -92,7 +142,7 @@ const outline = [
 
 // generates prompts in terminal for user to answer
 const promptUser = () => {
-    return inquirer.prompt(outline);
+    return inquirer.prompt();
 };
 
 // render => () {
