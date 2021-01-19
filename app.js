@@ -16,7 +16,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 // default questions, last question will lead to role-specific question
-const questions = [
+const questions = ([
     // inquirer.prompt([
     // const outline = 
 
@@ -50,58 +50,61 @@ const questions = [
         ]
     },
 
-    // ROLE SPECIFIC QUESTIONS
-
-    { //add office number if manager 
-        type: "input",
-        name: "officeNumber",
-        message: "What is your office number?"
-    },
-
-    { //add github username if engineer 
-        type: "input",
-        name: "gitHub",
-        message: "What is your GitHub username?"
-    },
-
-    { //add school name if intern
-        type: "input",
-        name: "school",
-        message: "What school did you attend?"
-    },
-
-    // ADD OR SUBMIT QUESTION
-
     { //add another Employee?
         type: "confirm",
         name: "addEmployee",
         message: "Add Employee? Select no to submit."
-    }
-]
-).then(answers => {
-    if (answers.role === "Manager") {
-        var prompt = inquirer.createPromptModule();
-        prompt(questions.officeNumber);
-    } else if (answers.role === "Engineer") {
-        var prompt = inquirer.createPromptModule();
-        prompt(questions.gitHub);
-    } else {
-        var prompt = inquirer.createPromptModule();
-        prompt(questions.school);
-    };
-})
-    .catch(error => {
-        if (error.isTtyError) {
-            return "prompt couldn't be rendered in the current environment"
-        } else {
-            return "something else went wrong"
-        }
-    });
+    }])
 
 // generates prompts in terminal for user to answer
 const promptUser = () => {
-    return inquirer.prompt();
-};
+    return inquirer.prompt(questions)
+}
+
+//ask office number if manager 
+if (questions.role === "Manager") {
+    prompt({
+        type: "input",
+        name: "officeNumber",
+        message: "What is your office number?"
+    })
+}
+// ask github username if engineer
+else if (questions.role === "Engineer") {
+    prompt({
+        type: "input",
+        name: "gitHub",
+        message: "What is your GitHub username?"
+    })
+}
+// ask school name if intern
+else (questions.role === "Intern") {
+    prompt({
+        type: "input",
+        name: "school",
+        message: "What school did you attend?"
+    })
+}
+
+// for (i=0, i>1, i++) {
+//     promptUser()
+// }
+
+// ADD OR SUBMIT QUESTION
+if (questions.addEmployee === "true") {
+    promptUser()
+}
+
+
+//     .catch (error => {
+//     if (error.isTtyError) {
+//         return "prompt couldn't be rendered in the current environment"
+//     } else {
+//         return "something else went wrong"
+//     }
+// });
+
+
 
 
 // render() // returns a block of HTML including templated divs for each employee
