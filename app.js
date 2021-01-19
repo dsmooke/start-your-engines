@@ -78,51 +78,18 @@ const questions = [
         message: "Add Employee? Select no to submit."
     }
 ]
-    .then(answers => {
-        if (answers.role === "Manager") {
-            var prompt = inquirer.createPromptModule();
-            prompt(questions.officeNumber);
-        } else if (answers.role === "Engineer") {
-            var prompt = inquirer.createPromptModule();
-            prompt(questions.gitHub);
-        } else {
-            var prompt = inquirer.createPromptModule();
-            prompt(questions.school);
-        };
-
-
-        // return inquirer.Question.officeNumber
-        // } else if
-        //     (answers.role === "Engineer") {
-        //     return inquirer.Question.gitHub
-        // } else {
-        //     return inquirer.Question.school
-        // }
-
-        // while (answers.addEmployee === true) {
-        //     return inquirer.prompt(questions.addEmployee), i++;
-        // }
-
-
-
-        //     // 
-        // ]).then(answers => {//use user feedback for...whatever
-        //     // while yes to adding new employee, go through prompts again
-        //     while (answers.addEmployee === true) {
-        //         return inquirer.prompt(), i++;
-        //     }
-        //     if (answers.role === "Manager") {
-        //         return inquirer.Question.officeNumber
-        //     } else if
-        //         (answers.role === "Engineer") {
-        //         return inquirer.Question.gitHub
-        //     } else {
-        //         return inquirer.Question.school
-        //     }
-
-
-
-    })
+).then(answers => {
+    if (answers.role === "Manager") {
+        var prompt = inquirer.createPromptModule();
+        prompt(questions.officeNumber);
+    } else if (answers.role === "Engineer") {
+        var prompt = inquirer.createPromptModule();
+        prompt(questions.gitHub);
+    } else {
+        var prompt = inquirer.createPromptModule();
+        prompt(questions.school);
+    };
+})
     .catch(error => {
         if (error.isTtyError) {
             return "prompt couldn't be rendered in the current environment"
@@ -130,25 +97,6 @@ const questions = [
             return "something else went wrong"
         }
     });
-
-
-// if (employee.getRole() === "Manager") {
-//     outline.push[{
-//         type: "input",
-//         name: "officeNumber",
-//         message: "What is your office number?"
-//     }]
-// }
-
-// if (answers.name === "Engineer") {
-//         filter() {
-//             return new inquirer.prompt{ 
-// type: "input",
-// name: "officeNumber",
-// message: "What is your office number?"
-//             }
-//         }
-//     }
 
 // generates prompts in terminal for user to answer
 const promptUser = () => {
