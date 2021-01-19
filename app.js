@@ -10,12 +10,8 @@ const Intern = require("./lib/Intern");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-// const writeFileAsync = util.promisify(fs.writeFile);
-// const util = require("util");
-
 const render = require("./lib/htmlRenderer");
 
-// default questions, last question will lead to role-specific question
 const questions = ([
     // inquirer.prompt([
     // const outline = 
@@ -50,29 +46,33 @@ const questions = ([
         ]
     },
 
-    { //add another Employee?
-        type: "confirm",
-        name: "addEmployee",
-        message: "Add Employee? Select no to submit."
-    },
-
     { // add office number
         type: "input",
         name: "officeNumber",
-        message: "What is your office number?"
+        message: "What is your office number?",
+        when: answers => answers.role === "Manager"
     },
 
     { // add github name
         type: "input",
         name: "gitHub",
-        message: "What is your GitHub username?"
+        message: "What is your GitHub username?",
+        when: answers => answers.role === "Engineer"
     },
 
     { // add school name
         type: "input",
         name: "school",
-        message: "What school did you attend?"
-    }])
+        message: "What school did you attend?",
+        when: answers => answers.role === "Intern"
+    },
+
+    // { //add another Employee?
+    //     type: "confirm",
+    //     name: "addEmployee",
+    //     message: "Add Employee? Select no to submit."
+    // }
+])
 
 // generates prompts in terminal for user to answer
 const promptUser = () => {
@@ -86,15 +86,16 @@ const renderTeam = (answers) => {
 Name: ${answers.name}
 ID: ${answers.id}
 Email: ${answers.email}
-GitHub Profile: ${answers.gitHub}
-School: ${answers.school}
+${answers.officeNumber ? "Office Number: " + answers.officeNumber : ""}
+${answers.gitHub ? "GitHub Profile: " + answers.gitHub : ""}
+${answers.school ? "School: " + answers.school : ""}
     `
 }
 
-// ADD OR SUBMIT QUESTION
-if (answers.addEmployee === "true") {
-    promptUser()
-};
+// // ADD OR SUBMIT QUESTION
+// if (answers.addEmployee === "true") {
+//     promptUser()
+// };
 
 //     .catch (error => {
 //     if (error.isTtyError) {
@@ -109,11 +110,11 @@ if (answers.addEmployee === "true") {
 
 
 
-const init = () => {
+const init = async () => {
     try {
-        const addedText = promptUser();
+        const addedText = await promptUser();
         const team = renderTeam(addedText);
-        fs.writeFile("team.html", team);
+        fs.writeFile("team.html", team, (err) => console.log(err));
 
         console.log("Successfully created team roster");
     } catch (error) {
