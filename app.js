@@ -79,42 +79,25 @@ const promptUser = () => {
     return inquirer.prompt(questions)
 }
 
-// render() // returns a block of HTML including templated divs for each employee
-
-const renderTeam = (answers) => {
-    return `
-Name: ${answers.name}
-ID: ${answers.id}
-Email: ${answers.email}
-${answers.officeNumber ? "Office Number: " + answers.officeNumber : ""}
-${answers.gitHub ? "GitHub Profile: " + answers.gitHub : ""}
-${answers.school ? "School: " + answers.school : ""}
-    `
-}
-
-// // ADD OR SUBMIT QUESTION
-// if (answers.addEmployee === "true") {
-//     promptUser()
-// };
-
-//     .catch (error => {
-//     if (error.isTtyError) {
-//         return "prompt couldn't be rendered in the current environment"
-//     } else {
-//         return "something else went wrong"
-//     }
-// });
-
-
-
-
+// const renderTeam = (answers) => {
+//     return `
+// Name: ${answers.name}
+// ID: ${answers.id}
+// Email: ${answers.email}
+// ${answers.officeNumber ? "Office Number: " + answers.officeNumber : ""}
+// ${answers.gitHub ? "GitHub Profile: " + answers.gitHub : ""}
+// ${answers.school ? "School: " + answers.school : ""}
+//     `
+// }
 
 
 const init = async () => {
     try {
-        const addedText = await promptUser();
-        const team = renderTeam(addedText);
-        fs.writeFile("team.html", team, (err) => console.log(err));
+        let employees = [];
+        const employee = await promptUser();
+
+        const team = render(employee);
+        fs.writeFile(outputPath, team, (err) => console.log(err));
 
         console.log("Successfully created team roster");
     } catch (error) {
