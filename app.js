@@ -61,40 +61,51 @@ const promptUser = () => {
     return inquirer.prompt(questions)
 }
 
-//ask office number if manager 
-if (questions.role === "Manager") {
-    prompt({
-        type: "input",
-        name: "officeNumber",
-        message: "What is your office number?"
-    })
-}
-// ask github username if engineer
-else if (questions.role === "Engineer") {
-    prompt({
-        type: "input",
-        name: "gitHub",
-        message: "What is your GitHub username?"
-    })
-}
-// ask school name if intern
-else (questions.role === "Intern") {
-    prompt({
+// render() // returns a block of HTML including templated divs for each employee
+
+const renderTeam = (answers) => {
+    return `
+Name: ${answers.name}
+ID: ${answers.id}
+Email: ${answers.email}
+GitHub Profile: ${answers.gitHub}
+School: ${answers.school}
+    `
+
+
+    //ask office number if manager 
+    if (answers.role === "Manager") {
+        promptUser({
+            type: "input",
+            name: "officeNumber",
+            message: "What is your office number?"
+        })
+    }
+    // ask github username if engineer
+    else if (answers.role === "Engineer") {
+        promptUser({
+            type: "input",
+            name: "gitHub",
+            message: "What is your GitHub username?"
+        })
+    }
+    // ask school name if intern
+    else (answers.role === "Intern")
+    promptUser({
         type: "input",
         name: "school",
         message: "What school did you attend?"
-    })
-}
+    });
 
-// for (i=0, i>1, i++) {
-//     promptUser()
-// }
+    // for (i=0, i>1, i++) {
+    //     promptUser()
+    // }
 
-// ADD OR SUBMIT QUESTION
-if (questions.addEmployee === "true") {
-    promptUser()
-}
-
+    // ADD OR SUBMIT QUESTION
+    if (answers.addEmployee === "true") {
+        promptUser()
+    }
+};
 
 //     .catch (error => {
 //     if (error.isTtyError) {
@@ -107,23 +118,13 @@ if (questions.addEmployee === "true") {
 
 
 
-// render() // returns a block of HTML including templated divs for each employee
 
-const renderTeam = (answers) => {
-    return `
-Name: ${answers.name}
-ID: ${answers.id}
-Email: ${answers.email}
-GitHub Profile: ${answers.gitHub}
-School: ${answers.school}
-    `
-};
 
-const init = async () => {
+const init = () => {
     try {
-        const addedText = await promptUser();
+        const addedText = promptUser();
         const team = renderTeam(addedText);
-        await writeFileAsync("team.html", team);
+        fs.writeFile("team.html", team);
 
         console.log("Successfully created team roster");
     } catch (error) {
