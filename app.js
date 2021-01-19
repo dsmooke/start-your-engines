@@ -15,6 +15,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+// default questions, last question will lead to role-specific question
 const questions = [
     // inquirer.prompt([
     // const outline = 
@@ -47,72 +48,81 @@ const questions = [
             "Engineer", // if Engineer -> github username
             "Intern" // if Intern -> school name
         ]
-    }
+    },
 
+    // ROLE SPECIFIC QUESTIONS
 
-]
-
-if (answers.role === "Manager") {
-    var prompt = inquirer.createPromptModule();
-    prompt(questions).then({
+    { //add office number if manager 
         type: "input",
         name: "officeNumber",
-        message: "what is your office number?"
-    }
-    // return inquirer.Question.officeNumber
-} else if
-    (answers.role === "Engineer") {
-    return inquirer.Question.gitHub
-} else {
-    return inquirer.Question.school
-}
+        message: "What is your office number?"
+    },
 
-while (answers.addEmployee === true) {
-    return inquirer.prompt(), i++;
-}
-
-{ //add office number if manager 
-    type: "input",
-        name: "officeNumber",
-            message: "What is your office number?"
-},
-
-{ //add github username if engineer 
-    type: "input",
+    { //add github username if engineer 
+        type: "input",
         name: "gitHub",
-            message: "What is your GitHub username?"
-},
+        message: "What is your GitHub username?"
+    },
 
-{ //add school name if intern
-    type: "input",
+    { //add school name if intern
+        type: "input",
         name: "school",
-            message: "What school did you attend?"
-},
+        message: "What school did you attend?"
+    },
 
-{ //add another Employee?
-    type: "confirm",
+    // ADD OR SUBMIT QUESTION
+
+    { //add another Employee?
+        type: "confirm",
         name: "addEmployee",
-            message: "Add Employee? Select no to submit."
-}
-
-    // 
-]).then(answers => {//use user feedback for...whatever
-    // while yes to adding new employee, go through prompts again
-    while (answers.addEmployee === true) {
-        return inquirer.prompt(), i++;
+        message: "Add Employee? Select no to submit."
     }
-    if (answers.role === "Manager") {
-        return inquirer.Question.officeNumber
-    } else if
-        (answers.role === "Engineer") {
-        return inquirer.Question.gitHub
-    } else {
-        return inquirer.Question.school
-    }
+]
+    .then(answers => {
+        if (answers.role === "Manager") {
+            var prompt = inquirer.createPromptModule();
+            prompt(questions.officeNumber);
+        } else if (answers.role === "Engineer") {
+            var prompt = inquirer.createPromptModule();
+            prompt(questions.gitHub);
+        } else {
+            var prompt = inquirer.createPromptModule();
+            prompt(questions.school);
+        };
+
+
+        // return inquirer.Question.officeNumber
+        // } else if
+        //     (answers.role === "Engineer") {
+        //     return inquirer.Question.gitHub
+        // } else {
+        //     return inquirer.Question.school
+        // }
+
+        // while (answers.addEmployee === true) {
+        //     return inquirer.prompt(questions.addEmployee), i++;
+        // }
 
 
 
-})
+        //     // 
+        // ]).then(answers => {//use user feedback for...whatever
+        //     // while yes to adding new employee, go through prompts again
+        //     while (answers.addEmployee === true) {
+        //         return inquirer.prompt(), i++;
+        //     }
+        //     if (answers.role === "Manager") {
+        //         return inquirer.Question.officeNumber
+        //     } else if
+        //         (answers.role === "Engineer") {
+        //         return inquirer.Question.gitHub
+        //     } else {
+        //         return inquirer.Question.school
+        //     }
+
+
+
+    })
     .catch(error => {
         if (error.isTtyError) {
             return "prompt couldn't be rendered in the current environment"
@@ -144,11 +154,6 @@ while (answers.addEmployee === true) {
 const promptUser = () => {
     return inquirer.prompt();
 };
-
-// render => () {
-//     Manager, Engineer, Intern
-// }
-
 
 
 // render() // returns a block of HTML including templated divs for each employee
