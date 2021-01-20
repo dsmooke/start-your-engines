@@ -6,6 +6,8 @@ This is the tenth assignment for the UConn Coding Boot Camp curriculum. We have 
 
 This assignment utilizes Node.js and Inquirer.js package to build a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person; it also utilizes the jest.js package to ensure that all unit tests pass.
 
+View the application [here](https://youtu.be/CEHbslpDAQs) 
+
 ## Table of Contents
 
 *  [Goals](#Goals)
@@ -14,16 +16,15 @@ This assignment utilizes Node.js and Inquirer.js package to build a Node CLI tha
 *  [Acceptance Criteria](#AcceptanceCriteria)
 *  [Installation](#Installation)
 *  [Usage](#Usage)
-*  [Contributing](#Contributing)
-*  [Tests](#Tests)
+*  [Bugs](#Bugs)
 *  [Questions](#Questions)
 *  [License](#License)
 
 ## Goals
 
 1. To build a Node CLI that takes in information about employees and generates and HTML webpage that displays summaries for each person. 
-2. 
-3. To ensure that all unit tests pass. 
+
+2. To ensure that all unit tests pass. 
 
 ## Instructions
 
@@ -53,7 +54,6 @@ THEN an employee can enter their additional information
 THEN this is displayed at the bottom of their employee card
 
 ```
-  
 
 ## Installation
 
@@ -96,51 +96,39 @@ const writeFileAsync = util.promisify(fs.writeFile);
 
 9. If working, answer the prompts by entering your own inputs via the command line. 
 
-10. A file called **Roster.html** will be created upon completeion. 
+10. A file called **team.html** will be created upon completeion and will be found in the `output` folder. 
 
 
-  
-
-## Usage/Developer
+## Usage
 
 Operating instructions and examples for use.
 
-1. take user inputs to create a team roster
+1. Enter your Name
+2. Enter your ID
+3. Enter your Email
+4. Choose your Role: 
+    * Manager (go to step 5)
+    * Engineer (go to step 6)
+    * Intern (go to step 7)
+5. Enter your Office Number
+6. Enter your GitHub Username
+7. Enter your School 
+8. team.html generated in output folder
+   
+![working demo alt](./imgs/teamHTML-demo.png)
 
-![working demo alt](https://via.placeholder.com/150)
 
-2. use node cli to create roster
+## Bugs
 
-![code-snipped alt](https://via.placeholder.com/150)
-
-3. use in conjunction with bootstrap template
-
-![code-snipped alt](https://via.placeholder.com/150)
-
-  
-
-## Contributing
-
-*If you would like other developers to contribute to your application add guidelines for how to do so.*
-
-  
-
-## Tests
-
-*Tests for application. Examples on how to run them.*
+Did not render team page correctly. App.js did not replace placeholders. Role-specific html templates were not added into the main html code. 
 
   
-  
-
 ## Questions
 
 Link to my [GitHub Profile](https://github.com/dsmooke)
 
-  
-
 You can reach me at dana.smooke@gmail.com if you have any additional questions.
 
-  
 
 ## License
 
