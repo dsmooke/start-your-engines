@@ -2,6 +2,9 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+// const writeFileAsync = util.promisify(fs.writeFile);
+const util = require("util");
+
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
@@ -11,6 +14,8 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+
+let employeeList = [];
 
 const questions = ([
     // inquirer.prompt([
@@ -73,40 +78,55 @@ const promptUser = () => {
     return inquirer.prompt(questions)
 }
 
-// const renderTeam = (answers) => {
+function renderTeam() {
+    if (answers.role === "Engineer") {
+        const engineer = new Engineer(answers.name, answers.id, answers.email, answers.gitHub)
+        employeeList.push(engineer)
+    }
+    else if (answers.role === "Manager") {
+        const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
+        employeeList.push(manager)
+    }
+    else if (answers.role === "Intern") {
+        const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
+        employeeList.push(intern)
+    }
+    else {
+        throw new Error("Your role is not valid.")
+    }
+
+    return renderTeam();
+};
+
 //     return `
-// Name: ${answers.name}
-// ID: ${answers.id}
-// Email: ${answers.email}
-// ${answers.officeNumber ? "Office Number: " + answers.officeNumber : ""}
-// ${answers.gitHub ? "GitHub Profile: " + answers.gitHub : ""}
-// ${answers.school ? "School: " + answers.school : ""}
-//     `
-// }
+// // Name: ${answers.name}
+// // ID: ${answers.id}
+// // Email: ${answers.email}
+// // ${answers.officeNumber ? "Office Number: " + answers.officeNumber : ""}
+// // ${answers.gitHub ? "GitHub Profile: " + answers.gitHub : ""}
+// // ${answers.school ? "School: " + answers.school : ""}
+// //     `
+//     // }
 
 
 const init = async () => {
     try {
-        let employeeList = [];
-        const employee = await promptUser();
-        employeeList.push(employee);
+
+        // const employee = 
+        await promptUser();
+        // employeeList.push(employee);
 
         // based on user input add new employee type
 
-        const team = render(employeeList);
-        fs.writeFile(outputPath, team, (err) => console.log(err));
+        const team = await render(employeeList);
 
-        console.log("Successfully created team roster");
+        fs.writeFileSync(outputPath, team);
+
+        console.log("Successfully created team roster in the output folder.");
+
     } catch (error) {
         console.log(error);
     }
 };
 
 init();
-
-
-// Write code to use inquirer to gather information about the development team members, and to create objects for each team member (using the correct classes as blueprints!)
-
-// After the user has input all employees desired, call the `render` function (required above) and pass in an array containing all employee objects; the `render` function will generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML returned from the `render` function. Now write it to a file named `team.html` in the `output` folder. You can use the variable `outputPath` above target this location.
