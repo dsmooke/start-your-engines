@@ -66,12 +66,6 @@ const questions = ([
         message: "What school did you attend?",
         when: answers => answers.role === "Intern"
     },
-
-    // { //add another Employee?
-    //     type: "confirm",
-    //     name: "addEmployee",
-    //     message: "Add Employee? Select no to submit."
-    // }
 ])
 
 // generates prompts in terminal for user to answer
@@ -93,10 +87,13 @@ const promptUser = () => {
 
 const init = async () => {
     try {
-        let employees = [];
+        let employeeList = [];
         const employee = await promptUser();
+        employeeList.push(employee);
 
-        const team = render(employee);
+        // based on user input add new employee type
+
+        const team = render(employeeList);
         fs.writeFile(outputPath, team, (err) => console.log(err));
 
         console.log("Successfully created team roster");
