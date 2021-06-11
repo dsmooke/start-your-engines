@@ -2,8 +2,6 @@
 
 ## Description
 
-This is the tenth assignment for the UConn Coding Boot Camp curriculum. We have covered the following topics thus far: Git, Terminal, GitHub, GitHub Pages, Web Accessibility, HTML, CSS, JavaScript, jQuery, Bootstrap, DOM Traversal, Web APIs, Third-Party APIs, Server-Side APIs, Node.js, and Inquirer npm package.
-
 This assignment utilizes Node.js and Inquirer.js package to build a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person; it also utilizes the jest.js package to ensure that all unit tests pass.
 
 View the application [here](https://youtu.be/CEHbslpDAQs) 
@@ -134,13 +132,6 @@ You can reach me at dana.smooke@gmail.com if you have any additional questions.
 
 [MIT License](MITLicense.txt)
 
-  
-  
-  
-  
 
 ---
-
-  
-
 © 2020 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
